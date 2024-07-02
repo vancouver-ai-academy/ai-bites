@@ -9,6 +9,9 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 
 def main(text="quantization is awesome"):
+    """
+    A Simple Example to demonstrate the usage of Quanto for quantizing a pre-trained model.
+    """
     # constants
     model_name = "assemblyai/distilbert-base-uncased-sst2"
     quanto_dtype = quanto.qint8
@@ -30,6 +33,9 @@ def main(text="quantization is awesome"):
 
 
 def predict(model, tokenizer, text):
+    """
+    Given a text, predict the sentiment using the model.
+    """
     tokenized_segments = tokenizer(
         [text],
         return_tensors="pt",
@@ -61,8 +67,10 @@ def predict(model, tokenizer, text):
     print(f"Positive: {pos_prob:.1f}%")
     print(f"Negative: {neg_prob:.1f}%")
 
+    # return the probabilities and module sizes
     return pos_prob, neg_prob, module_sizes
 
 
 if __name__ == "__main__":
+    # run the main function that quantizes a model
     main(text="quantization is awesome")
