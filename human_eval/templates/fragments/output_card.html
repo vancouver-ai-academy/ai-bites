@@ -19,9 +19,13 @@
         </div> -->
         <!-- Plot on the right -->
         <div id="model-output">
-            <p><strong>Model Output:</strong></p>
-            <a href="{{model_output.img_path}}" target="_blank">
-                <img src="{{model_output.img_path}}" style="max-width:95%" alt="Plot Image">
+            <p style="margin: 0; font-size: 1.3rem; font-weight: bold;"><strong>Instruction:</strong></p>
+            <p>{{ model_output.instruction | replace('\n', '<br>') | safe }}</p>
+            <hr>
+             <p style="margin: 0; font-size: 1.3rem; font-weight: bold;"><strong>Query Passage:</strong></p>
+            <p>{{ model_output.query_passage | replace('\n', '<br>') | safe }}</p>
+            <!-- <a href="{{model_output.img_path}}" target="_blank">
+                <img src="{{model_output.img_path}}" style="max-width:95%" alt="Plot Image"> -->
             </a>
             <br>
         </div>

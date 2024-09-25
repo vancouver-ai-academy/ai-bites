@@ -56,8 +56,8 @@ function fetchDataEvalArcade() {
                 const insightBlob2 = document.getElementById('insight-blob2');
                 insightBlob2.innerHTML = `${data.insight_card_b}`;
 
-                const question = document.getElementById('form-header');
-                question.innerHTML = ` Which Model has Better Output?  <p style="font-style: italic;font-size: 0.8rem;color:gray" id="insight-desc">Task: "${data.task}"</p> `;
+                // const question = document.getElementById('form-header');
+                // question.innerHTML = ` Which Model has Better Output?  <p style="font-style: italic;font-size: 0.8rem;color:gray" id="insight-desc">Task: "${data.task}"</p> `;
                 
                 const timestamp = document.getElementById('timestamp');
                 timestamp.innerHTML = `${data.timestamp}`

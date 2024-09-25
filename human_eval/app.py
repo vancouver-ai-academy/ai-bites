@@ -95,11 +95,10 @@ def submit_feedback_compare():
     try:
         # Parse the JSON data from the request
         feedback_data = request.get_json()
-        feedback_path = os.path.join(
-            app.config["STUDY_FOLDER"], feedback_data["timestamp"]
-        )
+
+        feedback_path = os.path.join(args.output_folder, feedback_data["timestamp"])
         assert os.path.exists(feedback_path)
-        map_dict = {0: "A", 1: "B", -1: "neither", 99: "both"}
+        map_dict = {0: "yes", 1: "no"}
         chosen = map_dict[feedback_data["choice"]]
         comment = feedback_data["text"]
         feedback_fname = os.path.join(feedback_path, "feedback.json")
@@ -109,7 +108,7 @@ def submit_feedback_compare():
             "timestamp": feedback_data["timestamp"],
             "question": feedback_data["question"],
         }
-        ut.save_json(feedback_fname, feedback_dict)
+        save_json(feedback_fname, feedback_dict)
         print(feedback_dict)
         print("Saved in ", feedback_fname)
 
@@ -142,11 +141,19 @@ def load_predictions(path):
     """
     To be customized by user
     """
-    img_list = glob.glob(os.path.join(path, "*", "*.jpg"))
-    img_list = [{"img_path": img} for img in img_list]
-    assert len(img_list) > 0, f"No images found in {path}"
+    import pandas as pd
 
-    return img_list
+    df = pd.read_csv("static/datasets/llm_samples_E5_nq_train 2.csv")
+    pred_list = []
+    for i in range(len(df)):
+        pred_dict = df.iloc[i].to_dict()
+        pred_list.append(pred_dict)
+
+    # img_list = glob.glob(os.path.join(path, "*", "*.jpg"))
+    # img_list = [{"img_path": img} for img in img_list]
+    # assert len(img_list) > 0, f"No images found in {path}"
+
+    return pred_list
 
 
 @app.route("/eval_get_insight_cards", methods=["POST"])
@@ -162,31 +169,32 @@ def eval_get_insight_cards():
 
     # get image predictions
     model_1_preds = load_predictions(args.model_1_preds)
-    model_2_preds = load_predictions(args.model_2_preds)
+    # model_2_preds = load_predictions(args.model_2_preds)
 
     # get random index
     ind = np.random.choice(len(model_1_preds))
-    # coin flip
-    if np.random.rand() > 0.5:
-        model_a = model_1_preds[ind]
-        model_b = model_2_preds[ind]
-    else:
-        model_a = model_2_preds[ind]
-        model_b = model_1_preds[ind]
+    model_a = model_1_preds[ind]
+    # # coin flip
+    # if np.random.rand() > 0.5:
+    #     model_a = model_1_preds[ind]
+    #     model_b = model_2_preds[ind]
+    # else:
+    #     model_a = model_2_preds[ind]
+    #     model_b = model_1_preds[ind]
 
     # assert all exist
-
+    # model_a["instruction"] = model_a["instruction"].replace("\n", "<br>")
     data["insight_card_a"] = render_template(
         "fragments/output_card.html",
         model_output=model_a,
         id="A",
     )
 
-    data["insight_card_b"] = render_template(
-        "fragments/output_card.html",
-        model_output=model_b,
-        id="B",
-    )
+    # data["insight_card_b"] = render_template(
+    #     "fragments/output_card.html",
+    #     model_output=model_b,
+    #     id="B",
+    # )
 
     data["task"] = args.task_name
     data["timestamp"] = str(time.time()).replace(".", "")
@@ -196,10 +204,10 @@ def eval_get_insight_cards():
 
     # save in json file
     save_json(os.path.join(feedback_path, "model_a.json"), model_a)
-    save_json(os.path.join(feedback_path, "model_b.json"), model_b)
-    save_json(
-        os.path.join(feedback_path, "feedback.json"), {"chosen": "", "comment": ""}
-    )
+    # save_json(os.path.join(feedback_path, "model_b.json"), model_b)
+    # save_json(
+    #     os.path.join(feedback_path, "feedback.json"), {"choice": "", "comment": ""}
+    # )
     print("saved in ", feedback_path)
     return jsonify(data)
 
