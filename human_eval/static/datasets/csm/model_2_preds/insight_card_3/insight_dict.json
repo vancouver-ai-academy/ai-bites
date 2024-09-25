@@ -1,0 +1,33 @@
+{
+    "answer": "Approximately 20% of high-impact cases are assigned a low or medium priority.",
+<<<<<<< HEAD
+    "followup": "What are the average resolution times for high-impact cases with low or medium priority?",
+    "header": "Significant priority mismatch in high-impact cases",
+    "indicator": "impact_priority_mismatch - This indicator is triggered as there is a notable mismatch between high-impact cases and their assigned priority levels.",
+    "insight": "This finding reveals that 20% of high-impact cases, which should ideally be prioritized, are instead categorized as low or medium priority, raising concerns about the effectiveness of case management and potential delays in resolution for critical issues.",
+=======
+    "header": "20% of high-impact cases misclassified in priority",
+    "indicator": "impact_priority_mismatch - This indicator is triggered as there is a significant mismatch between the high impact of cases and their assigned low or medium priority.",
+    "insight": "This finding indicates that 20% of high-impact cases, which should ideally be prioritized as high, are instead assigned a lower priority, potentially leading to delays in resolution and customer dissatisfaction; this is concerning as it suggests a misalignment between case impact and priority assignment.",
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    "output_folder": "web/static/datasets/csm/insights_from_questions_list/poirot/insight_card_3",
+    "plot_image": "plot.jpg",
+<<<<<<< HEAD
+    "plot_summary": "Out of the total cases analyzed, 20% of high-impact cases were assigned a low or medium priority, indicating a potential misalignment in prioritization.",
+    "question": "How often do high-impact cases have a low or medium priority assigned?",
+    "score": "75",
+    "severity": "medium",
+    "time_elapsed": {
+        "answer": 3.1865108013153076,
+        "code_generation": 14.752839088439941
+=======
+    "plot_summary": "Out of the total high-impact cases, 20% were found to have a priority level categorized as low or medium, which raises concerns about the effectiveness of prioritization in case management.",
+    "question": "How often do high-impact cases have a low or medium priority assigned?",
+    "score": "85",
+    "severity": "high",
+    "time_elapsed": {
+        "answer": 2.1835927963256836,
+        "code_generation": 5.276899576187134
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    }
+}

@@ -1,0 +1,34 @@
+{
+<<<<<<< HEAD
+    "answer": "Assignment groups that are reassigning cases more than 3 times include 'Animal nutritionist', 'Astronomer', 'Broadcast engineer', 'Copywriter, advertising', 'Engineer, building services', 'Jewellery designer', 'Location manager', 'Occupational hygienist', 'Physiotherapist', and 'Therapist, art'.",
+    "followup": "What are the average resolution times for cases handled by these frequently reassigned groups?",
+    "header": "Multiple assignment groups show high reassignments",
+    "indicator": "Escalation and reassignment patterns; more than 3 reassignments indicate potential inefficiencies.",
+    "insight": "Specifically, the 'Animal nutritionist' group has the highest reassignment count at 2121, while 'Physiotherapist' and 'Therapist, art' also show significant numbers, suggesting that these groups may be struggling with case management, which could lead to delays in resolution times.",
+=======
+    "answer": "The assignment groups that are reassigning cases more than 3 times include 'Animal nutritionist', 'Astronomer', 'Broadcast engineer', 'Copywriter, advertising', 'Engineer, building services', 'Jewellery designer', 'Location manager', 'Occupational hygienist', 'Physiotherapist', and 'Therapist, art'.",
+    "followup": "What are the average case durations for these assignment groups?",
+    "header": "Multiple assignment groups show high reassignment rates",
+    "indicator": "Escalation and reassignment patterns; more than 3 reassignments indicate potential inefficiencies.",
+    "insight": "This finding highlights that assignment groups like 'Animal nutritionist' and 'Astronomer' are reassigning cases over 3 times, with the highest reassignment count reaching 2121, which may suggest a lack of clarity in case ownership or expertise, warranting further investigation.",
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    "output_folder": "web/static/datasets/csm/insights_from_questions_list/poirot/insight_card_1",
+    "plot_image": "plot.jpg",
+<<<<<<< HEAD
+    "plot_summary": "Analysis reveals that several assignment groups have high reassignment counts, with values ranging from 1868 to 2121, indicating potential inefficiencies in case handling.",
+=======
+    "plot_summary": "Analysis reveals that several assignment groups are consistently reassigning cases, with counts ranging from 1868 to 2121, indicating potential inefficiencies in case handling.",
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    "question": "Which assignment groups are reassigning cases more than 3 times?",
+    "score": "85",
+    "severity": "medium",
+    "time_elapsed": {
+<<<<<<< HEAD
+        "answer": 3.0864064693450928,
+        "code_generation": 118.99260973930359
+=======
+        "answer": 2.7324368953704834,
+        "code_generation": 5.205381393432617
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    }
+}

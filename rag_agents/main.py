@@ -3,8 +3,8 @@ import warnings
 
 # Suppress all warnings
 warnings.filterwarnings("ignore")
-# os.environ["HF_HOME"] = "/mnt/home/cached/"
-# os.environ["TORCH_HOME"] = "/mnt/home/cached/"
+os.environ["HF_HOME"] = "/mnt/home/cached/"
+os.environ["TORCH_HOME"] = "/mnt/home/cached/"
 from langchain_community.vectorstores import FAISS
 from langchain_community.vectorstores.faiss import DistanceStrategy
 from langchain.document_loaders import HuggingFaceDatasetLoader
@@ -31,6 +31,16 @@ def main():
             page_content="The future job market will likely require skills in AI management, data analysis, and cyber-physical systems."
         ),
     ]
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from transformers import pipeline
+    tokenizer = AutoTokenizer.from_pretrained("SweatyCrayfish/llama-3-8b-quantized")
+
+    model_4bit = AutoModelForCausalLM.from_pretrained("SweatyCrayfish/llama-3-8b-quantized", device_map="auto", load_in_4bit=True)
+
+    
+
+    generator = pipeline(task="text-generation", model=model_4bit, tokenizer=tokenizer)
+    generator("Three Rings for the Elven-kings under the sky")
 
     print(f"Chunking a list of {len(data)} documents.")
 

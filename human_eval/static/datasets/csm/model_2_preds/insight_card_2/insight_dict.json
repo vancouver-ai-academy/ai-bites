@@ -1,0 +1,32 @@
+{
+    "answer": "Approximately 16.4% of high-priority cases breached their SLA.",
+    "followup": "What are the common characteristics of the high-priority cases that breached their SLA?",
+<<<<<<< HEAD
+    "header": "High SLA breach rate in priority cases",
+    "indicator": "SLA_met_or_breached - This indicator is triggered as it highlights the percentage of cases that did not meet the SLA.",
+    "insight": "This finding reveals that 16.4% of high-priority cases did not meet their SLA, which is concerning as it suggests potential inefficiencies in handling urgent cases, especially since SLA compliance is critical for customer satisfaction and operational performance.",
+=======
+    "header": "16.4% SLA breach rate in high-priority cases",
+    "indicator": "SLA_met_or_breached; this indicator is triggered as it highlights the percentage of cases that did not meet the SLA.",
+    "insight": "This finding reveals that 16.4% of high-priority cases did not meet their SLA, which is concerning as it suggests potential inefficiencies in handling urgent cases, especially given that SLA compliance is critical for customer satisfaction and service performance.",
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    "output_folder": "web/static/datasets/csm/insights_from_questions_list/poirot/insight_card_2",
+    "plot_image": "plot.jpg",
+<<<<<<< HEAD
+    "plot_summary": "The analysis shows that out of the total high-priority cases, 16.4% resulted in SLA breaches, indicating a significant concern for service efficiency.",
+=======
+    "plot_summary": "The analysis shows that out of the total high-priority cases, 16.4% resulted in SLA breaches, indicating a notable concern for service efficiency.",
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    "question": "What percentage of high-priority cases breached their SLA?",
+    "score": "75",
+    "severity": "medium",
+    "time_elapsed": {
+<<<<<<< HEAD
+        "answer": 4.445629119873047,
+        "code_generation": 83.3957405090332
+=======
+        "answer": 2.433610200881958,
+        "code_generation": 5.060507774353027
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    }
+}

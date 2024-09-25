@@ -1,0 +1,29 @@
+{
+    "answer": "No, there are no cases where the resolution time exceeded the average by more than 3x.",
+    "header": "No concerning cases of excessive resolution time",
+    "indicator": "case_duration_metrics - No cases exceeded the threshold of 3x the average duration.",
+<<<<<<< HEAD
+    "insight": "This indicates that the maximum case resolution time recorded was 100 hours, which is not concerning as it does not exceed the threshold of 152.4 hours (3x the average). The data shows a consistent performance in case resolution times, suggesting effective management of customer service cases.",
+=======
+    "insight": "This indicates that the maximum case resolution time recorded was 100 hours, which is only 1.97 times the average, thus not raising any concerns regarding excessive delays in resolution times.",
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    "output_folder": "web/static/datasets/csm/insights_from_questions_list/poirot/insight_card_0",
+    "plot_image": "plot.jpg",
+<<<<<<< HEAD
+    "plot_summary": "The analysis revealed that all case resolution durations remained within acceptable limits, with none exceeding three times the average duration of 50.8 hours.",
+=======
+    "plot_summary": "The analysis shows that all cases have resolution durations within the acceptable range, with none exceeding three times the average duration of 50.8 hours.",
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    "question": "Are there any cases where the resolution time exceeded the average by more than 3x?",
+    "score": "10",
+    "severity": "clear",
+    "time_elapsed": {
+<<<<<<< HEAD
+        "answer": 2.412304162979126,
+        "code_generation": 59.16824221611023
+=======
+        "answer": 1.7168095111846924,
+        "code_generation": 23.931555032730103
+>>>>>>> 2289d805431ec572755276c7c9765016c0e4b07d
+    }
+}

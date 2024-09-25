@@ -1,0 +1,1 @@
+Are there any cases where the resolution time exceeded the average by more than 3x?
