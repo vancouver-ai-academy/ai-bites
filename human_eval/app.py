@@ -34,6 +34,11 @@ def index():
     return render_template(f"index.html")
 
 
+def save_json(path, data):
+    with open(path, "w") as f:
+        json.dump(data, f, indent=4)
+
+
 # MAIN FUNCTIONS
 ################
 
@@ -133,11 +138,12 @@ def main():
     return render_template("main.html")
 
 
-def get_image_preds(path):
+def load_predictions(path):
     """
     To be customized by user
     """
     img_list = glob.glob(os.path.join(path, "*", "*.jpg"))
+    img_list = [{"img_path": img} for img in img_list]
     assert len(img_list) > 0, f"No images found in {path}"
 
     return img_list
@@ -155,44 +161,46 @@ def eval_get_insight_cards():
     data = {}
 
     # get image predictions
-    model_1_images = get_image_preds(args.model_1_preds)
-    model_2_images = get_image_preds(args.model_2_preds)
+    model_1_preds = load_predictions(args.model_1_preds)
+    model_2_preds = load_predictions(args.model_2_preds)
 
     # get random index
-    ind = np.random.choice(len(model_1_images))
+    ind = np.random.choice(len(model_1_preds))
     # coin flip
     if np.random.rand() > 0.5:
-        model_a = model_1_images[ind]
-        model_b = model_2_images[ind]
+        model_a = model_1_preds[ind]
+        model_b = model_2_preds[ind]
     else:
-        model_a = model_2_images[ind]
-        model_b = model_1_images[ind]
+        model_a = model_2_preds[ind]
+        model_b = model_1_preds[ind]
 
     # assert all exist
 
     data["insight_card_a"] = render_template(
-        "fragments/model_result.html",
+        "fragments/output_card.html",
         model_output=model_a,
         id="A",
     )
 
     data["insight_card_b"] = render_template(
-        "fragments/model_result.html",
+        "fragments/output_card.html",
         model_output=model_b,
         id="B",
     )
 
-    data["task"] = "Plot Generation"
-    data["timestamp"] = time.time()
+    data["task"] = args.task_name
+    data["timestamp"] = str(time.time()).replace(".", "")
 
-    # feedback_path = os.path.join(app.config["STUDY_FOLDER"], data["timestamp"])
-    # os.makedirs(
-    #     os.path.join(app.config["STUDY_FOLDER"], data["timestamp"]), exist_ok=True
-    # )
+    feedback_path = os.path.join(args.output_folder, data["timestamp"])
+    os.makedirs(feedback_path, exist_ok=True)
 
     # save in json file
-    # ut.save_json(os.path.join(feedback_path, "insight_cards.json"), insight_cards_dict)
-    # print("saved in ", feedback_path)
+    save_json(os.path.join(feedback_path, "model_a.json"), model_a)
+    save_json(os.path.join(feedback_path, "model_b.json"), model_b)
+    save_json(
+        os.path.join(feedback_path, "feedback.json"), {"chosen": "", "comment": ""}
+    )
+    print("saved in ", feedback_path)
     return jsonify(data)
 
 
@@ -201,9 +209,9 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--port", type=int, default=7877)
+    parser.add_argument("-p", "--port", type=int, default=7879)
     parser.add_argument("-s", "--starting_page", type=str, default="eval")
-
+    parser.add_argument("-o", "--output_folder", type=str, default="results")
     parser.add_argument(
         "-m1",
         "--model_1_preds",
@@ -215,6 +223,13 @@ if __name__ == "__main__":
         "--model_2_preds",
         type=str,
         default="static/datasets/csm/model_2_preds",
+    )
+
+    parser.add_argument(
+        "-t",
+        "--task_name",
+        type=str,
+        default="Plot Generation",
     )
 
     args = parser.parse_args()
