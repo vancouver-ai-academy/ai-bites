@@ -217,7 +217,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--port", type=int, default=7879)
+    parser.add_argument("-p", "--port", type=int, default=7883)
     parser.add_argument("-s", "--starting_page", type=str, default="eval")
     parser.add_argument("-o", "--output_folder", type=str, default="results")
     parser.add_argument(

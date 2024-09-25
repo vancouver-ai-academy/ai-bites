@@ -34,5 +34,13 @@ Choose which output you prefer from the models
 ### 4. Host the App with a public link
 
 ```
-ngrok http <port_number>
+cd ngrok
+```
+
+```
+./ngrok config add-authtoken 2jC8NU59ayXQDSflA0ehk7PsE0j_2AERc6XWXR4zmABajdkWr
+```
+
+```
+./ngrok http 7883
 ```
