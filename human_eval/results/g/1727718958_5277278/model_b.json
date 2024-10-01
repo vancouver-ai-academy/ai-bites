@@ -1,0 +1,6 @@
+{
+    "path": "static/datasets/phi3_bigdoc",
+    "prompt": "<|image_1|>Create an SVG version of the image.",
+    "image_input": "static/datasets/phi3_bigdoc/fc70a53b8e5bf5a531a592f68efc0a7129444302/image.png",
+    "image_output": "static/datasets/phi3_bigdoc/fc70a53b8e5bf5a531a592f68efc0a7129444302/svg2image.png"
+}

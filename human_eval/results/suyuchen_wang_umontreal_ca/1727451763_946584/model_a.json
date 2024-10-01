@@ -1,0 +1,5 @@
+{
+    "path": "static/datasets/image2flow/phi3_bigdoc",
+    "image_input": "static/datasets/image2flow/phi3_bigdoc/f0afa3252bdc56d292dedbe3dd51ac966faa3a97/image.png",
+    "image_output": "static/datasets/image2flow/phi3_bigdoc/f0afa3252bdc56d292dedbe3dd51ac966faa3a97/html2image.png"
+}

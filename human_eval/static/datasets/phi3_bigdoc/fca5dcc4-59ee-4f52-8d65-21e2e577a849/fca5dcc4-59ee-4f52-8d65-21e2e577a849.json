@@ -1,0 +1,14 @@
+{
+    "sample_id": "fca5dcc4-59ee-4f52-8d65-21e2e577a849",
+    "dataset_name": "BigDocImage2Flow",
+    "task_name": "graphviz",
+    "user_input": {
+        "role": "user",
+        "content": "<|image_1|>Transform this flowchart into a corresponding .gv format."
+    },
+    "gpt_answer": {
+        "role": "assistant",
+        "content": "digraph G {\n        rankdir=RL;\n        node[shape=circle, style=filled, fillcolor=lightblue];\n        node1[label=\"Incident Reported\"];\n        node2[label=\"Incident Triage\"];\n        node3[label=\"Incident Assignment\"];\n        node4[label=\"Incident Investigation\"];\n        node5[label=\"Incident Resolution\"];\n        node6[label=\"Incident Escalation\", shape=rectangle, style=filled, fillcolor=lightgreen];\n        node7[label=\"Incident Closure\", shape=rectangle, style=filled, fillcolor=lightgreen];\n        node8[label=\"Incident Review\", shape=rectangle, style=filled, fillcolor=lightgreen];\n        node9[label=\"Incident Post-Mortem\", shape=rectangle, style=filled, fillcolor=lightgreen];\n        node1 -> node2[label=\"Reported\"];\n        node2 -> node3[label=\"Assigned\"];\n        node2 -> node6[label=\"Escalated\"];\n        node3 -> node4[label=\"Investigated\"];\n        node4 -> node5[label=\"Resolved\"];\n        node4 -> node6[label=\"Escalated\"];\n        node5 -> node7[label=\"Closed\"];\n        node6 -> node8[label=\"Reviewed\"];\n        node7 -> node9[label=\"Post-Mortem\"];\n        node8 -> node9[label=\"Post-Mortem\"];\n    }"
+    },
+    "output": "digraph G {\n        rankdir=RL;\n        node[shape=circle, style=filled, fillcolor=lightblue];\n        node1[label=\"Incident Reported\"];\n        node2[label=\"Incident Triage\"];\n        node3[label=\"Incident Assignment\"];\n        node4[label=\"Incident Investigation\"];\n        node5[label=\"Incident Resolution\"];\n        node6[label=\"Incident Escalation\", shape=rectangle, style=filled, fillcolor=lightgreen];\n        node7[label=\"Incident Closure\", shape=rectangle, style=filled, fillcolor=lightgreen];\n        node8[label=\"Incident Review\", shape=rectangle, style=filled, fillcolor=lightgreen];\n        node9[label=\"Incident Post-Mortem\", shape=rectangle, style=filled, fillcolor=lightgreen];\n        node1 -> node2[label=\"Reported\"];\n        node2 -> node3[label=\"Assigned\"];\n        node2 -> node6[label=\"Escalated\"];\n        node3 -> node4[label=\"Investigated\"];\n        node4 -> node5[label=\"Resolved\"];\n        node4 -> node6[label=\"Escalated\"];\n        node5 -> node7[label=\"Closed\"];\n        node6 -> node8[label=\"Reviewed\"];\n        node7 -> node9[label=\"Post-Mortem\"];\n        node8 -> node9[label=\"Post-Mortem\"];\n    } \n"
+}

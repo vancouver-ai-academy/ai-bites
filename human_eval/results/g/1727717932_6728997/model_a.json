@@ -1,0 +1,5 @@
+{
+    "path": "static/datasets/phi3_bigdoc",
+    "prompt": "<|image_1|>Generate a brief summary of the data presented in this chart.",
+    "text_output": "The histogram shows the distribution of satisfaction levels in the dataset, with the highest frequency of satisfaction level 4. The kernel density estimate (KDE) curve overlaid on the histogram indicates the underlying probability density function of the satisfaction levels. \n"
+}

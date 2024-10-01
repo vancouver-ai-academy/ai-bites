@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Evaluation Platform</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main_styles.css') }}">
+</head>
+<body>
+    <div class="banner" onclick="window.location.href='/'">
+        <div class="banner-left">JudgeOsiris</div>
+        <div class="banner-center">
+            <img src="/static/assets/agent.webp" alt="Icon" class="banner-icon">
+            <span id="banner-text" class="banner-text">Human Evaluation Platform</span>
+        </div>
+    </div>
+    <div style="height:100vh; display: flex; width: 100vw;">
+        <div id="compare-viewport" class="compare-page">
+            <!-- LOGIN BAR  -->
+            <div class="overlay" id="login_overlay">
+        <div class="small-blob">
+            <img src="/static/assets/osiris.webp" alt="Small Blob">
+        </div>
+        <div class="header" style="justify-content: center;text-align: center;">
+            <p style="font-size: 1.2rem;color:#626262">Judge Osiris</p>
+            <p style="font-size: 1.6rem;">Judge and Choose the Best BigDoc Model</p>
+        </div>
+
+        <div class="horizontal-line"></div>
+ <!-- <div class="sub-header" style="font-size:1.4rem"><span style="font-size: 0.8rem;">
+                        Enter your Email First</span></div> -->
+                   <div class="email-container" style="display: flex; flex-direction: column; align-items: stretch;">
+    <div id="bar" style="display: flex; align-items: center;">
+        <div class="email-label">Email:</div>
+        <input type="text" class="email-input" id="email-input" placeholder="Enter your email" style="flex-grow: 1;">
+    </div>
+    <button id="login-button" onclick="handleLogin()" 
+    style="color:white;border-radius: 5px; font-size: 14px; background-color: #292831;margin-bottom: 1rem;  border: 1px solid #ccc; padding: 0.5rem; width: 100%; cursor: pointer;">
+        Login
+    </button>
+</div>
+
+        
+    </div>
+
+
+            <div id="compare-columns" class="compare-columns" style="display:none">
+                  <!-- COLUMN A -->
+                <div class="flex1 content shadow">
+                    <div class="insight-blobs" id="insight-blob1">
+                    </div>
+                </div>
+                
+                <!-- CONTROL PANEL -->
+                <div class="eval-control-panel content shadow">
+                    
+                <h3 class="primary-color" id="form-header" style="margin:0">Which output is better? </h3>
+
+                <div class="eval-buttons">
+                     
+           
+                    <div class="toggler" onclick="handleInsightSelect(this, 0)" id="toggler0">
+                        A (Left)
+                    </div>
+                    <div class="toggler" onclick="handleInsightSelect(this, 1)" id="toggler1">
+                        B (Right)
+                    </div>
+                   
+                </div>
+                <div class="eval-buttons">
+                    
+                    <div class="toggler" onclick="handleInsightSelect(this, -1)" id="toggler-neither">
+                        Neither
+                    </div>
+                    <div class="toggler" onclick="handleInsightSelect(this, 100)" id="toggler-both">
+                        Both
+                    </div>
+                </div>   
+                <form id="compare-form" style="width:100%">
+                    <div class="choice-form">
+                        <input type="hidden" id="choice" value="-1" placeholder="-1" class="insight-input">
+                        <div style="display: flex;flex-direction: column;gap:16px; width:100%; align-items: center;">
+                            <textarea name="reason" class="feedback-text-input" id="reason" placeholder="Reason for your choice (optional)" class="insight-input" style="height: 3rem"></textarea>
+                            <button id="feedbackButton" class="feedbackButton" type="submit">Submit</button>
+                        </div>
+                    </div>
+                    
+                </form>
+                
+                 <div class="horizontal-line" style="width:100%"></div>
+                 
+                 <div style="text-align: center;">
+                    <img src="/static/assets/osiris.webp" style="max-width:80%" alt="Plot Image">
+                    </div>
+
+
+                    <p class="primary-color"  style="text-align: center;margin-top:-10px;font-style: italic;">Osiris: "Welcome <span  id="welcome-message"></span>"</p>
+                   
+
+                <h3 id="timestamp" class="hidden"></h3>
+
+                <!-- <div id="title">
+
+                </div> -->
+            </div>
+            
+                <!-- COLUMN B -->
+                <div class="flex1 content shadow">
+                    <div class="insight-blobs" id="insight-blob2">
+                    </div>
+                </div>
+            </div>
+
+            
+            
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/eval_comparison.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "sample_id": "fc69d4fb-3bdb-4817-9cef-6a7a3bd6d200",
+    "dataset_name": "BigDocImage2Flow",
+    "task_name": "graphviz",
+    "user_input": {
+        "role": "user",
+        "content": "<|image_1|>Convert the flowchart elements into a Graphviz-compatible format."
+    },
+    "gpt_answer": {
+        "role": "assistant",
+        "content": "digraph G {\n        rankdir=BT;\n        node[shape=box, style=filled, fillcolor=lightblue];\n        node1[label=\"Incident Reported\"];\n        node2[label=\"Incident Triage\"];\n        node3[label=\"Incident Assignment\"];\n        node4[label=\"Incident Resolution\"];\n        node5[label=\"Incident Escalation\"];\n        node6[label=\"Incident Closure\"];\n        node1 -> node2[label=\"Reported\"];\n        node2 -> node3[label=\"Assigned\"];\n        node2 -> node5[label=\"Escalated\"];\n        node3 -> node4[label=\"Resolved\"];\n        node4 -> node6[label=\"Closed\"];\n        node5 -> node4[label=\"Resolved\"];\n        node5 -> node6[label=\"Closed\"];\n    }"
+    },
+    "output": "digraph G {\n        rankdir=BT;\n        node[shape=box, style=filled, fillcolor=lightblue];\n        node1[label=\"Incident Reported\"];\n        node2[label=\"Incident Triage\"];\n        node3[label=\"Incident Assignment\"];\n        node4[label=\"Incident Resolution\"];\n        node5[label=\"Incident Escalation\"];\n        node6[label=\"Incident Closure\"];\n        node1 -> node2[label=\"Reported\"];\n        node2 -> node3[label=\"Assigned\"];\n        node2 -> node5[label=\"Escalated\"];\n        node3 -> node4[label=\"Resolved\"];\n        node4 -> node6[label=\"Closed\"];\n        node5 -> node4[label=\"Resolved\"];\n        node5 -> node6[label=\"Closed\"];\n    } \n"
+}

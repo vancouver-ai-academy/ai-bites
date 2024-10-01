@@ -1,0 +1,6 @@
+{
+    "path": "static/datasets/phi3_bigdoc",
+    "prompt": "<|image_1|>Please generate HTML to match this webpage.",
+    "image_input": "static/datasets/phi3_bigdoc/ebb9f202d2ba6a9c539bb2c568b373782545141e/image.png",
+    "image_output": "static/datasets/phi3_bigdoc/ebb9f202d2ba6a9c539bb2c568b373782545141e/html2image.png"
+}

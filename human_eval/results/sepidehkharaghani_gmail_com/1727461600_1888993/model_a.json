@@ -1,0 +1,6 @@
+{
+    "path": "static/datasets/phi3_bigdoc",
+    "prompt": "<|image_1|>How would this flowchart be structured in a JSON file? Generate it.",
+    "image_input": "static/datasets/phi3_bigdoc/ea069439-11d8-4e87-9534-856d5432d70e/image.png",
+    "image_output": "static/datasets/phi3_bigdoc/ea069439-11d8-4e87-9534-856d5432d70e/flow2image.png"
+}

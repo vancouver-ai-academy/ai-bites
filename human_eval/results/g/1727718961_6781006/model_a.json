@@ -1,0 +1,6 @@
+{
+    "path": "static/datasets/phi3_bigdoc",
+    "prompt": "<|image_1|>What does this chart tell us? Summarize it briefly.",
+    "image_input": "static/datasets/phi3_bigdoc/a73656be-9061-437e-bdfe-c40713caf586/image.png",
+    "text_output": "The bar plot shows the frequency of the top 20 most common surnames in the dataset. Anupam Kher has the highest frequency, followed by Rupa Bhimani and Takahiro Sakurai. The other surnames have progressively lower frequencies, with Naseeruddin Shah having the lowest frequency among the top 20. \n"
+}

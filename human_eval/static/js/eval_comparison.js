@@ -27,14 +27,40 @@ function endFetchUx() {
     compareViewport.style.display = 'flex';
 }
 
+function handleLogin() {
+    const emailInput = document.getElementById("email-input");
+
+    if (emailInput.value.trim() === '') {
+        alert('Please enter your email.');
+        return;
+    }
+
+    
+    const loginOverlay = document.getElementById('login_overlay');
+    loginOverlay.style.display = 'none';
+
+    const welcomeMessage = document.getElementById('welcome-message');
+    welcomeMessage.innerHTML = `${emailInput.value}`;
+
+    const compareColumns = document.getElementById('compare-columns');
+    compareColumns.style.display = 'flex';
+
+    fetchDataEvalArcade();
+    
+}
+
 function fetchDataEvalArcade() {
+    // const compareIdsElement = document.getElementById('compare-columns');
+    // compareIdsElement.style.display = 'none'; // Change 'color' and 'red' to desired style property and value
+             
     startFetchUx();
+    const welcomeMessage = document.getElementById('welcome-message');
    fetch('/eval_get_insight_cards', {
         method: 'POST', // Use POST to send data
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"dataset":"csm"})
+        body: JSON.stringify({"dataset":"csm", "user":welcomeMessage.innerText})
     })
         .then(response => response.json())
         .then(data => {
@@ -48,7 +74,10 @@ function fetchDataEvalArcade() {
                 // Populate title
                 // const title = document.getElementById('title');
                 // title.innerHTML = `${data.title}`;
-
+                // Add style to compare-ids element
+                // const compareIdsElement = document.getElementById('compare-columns');
+                // compareIdsElement.style.display = 'none'; // Change 'color' and 'red' to desired style property and value
+                
                 // Populate Insights
                 const insightBlob1 = document.getElementById('insight-blob1');
                 insightBlob1.innerHTML = `${data.insight_card_a}`;
@@ -56,8 +85,11 @@ function fetchDataEvalArcade() {
                 const insightBlob2 = document.getElementById('insight-blob2');
                 insightBlob2.innerHTML = `${data.insight_card_b}`;
 
-                // const question = document.getElementById('form-header');
-                // question.innerHTML = ` Which Model has Better Output?  <p style="font-style: italic;font-size: 0.8rem;color:gray" id="insight-desc">Task: "${data.task}"</p> `;
+                const question = document.getElementById('form-header');
+                question.innerHTML = ` Which Output is Better?  
+                                     <p style="font-style: italic;font-size: 1.2rem;color:gray" id="insight-desc">Task: "${data.task}"</p> 
+                                                     <p style="font-style: italic;font-size: .8rem;color:gray;margin-top:-10px" id="insight-desc">"${data.criterion}</p>
+                                     `;
                 
                 const timestamp = document.getElementById('timestamp');
                 timestamp.innerHTML = `${data.timestamp}`
@@ -118,9 +150,10 @@ submitFeedbackButton.addEventListener('click', function() {
     const divs = doc.getElementsByTagName('div');
     const timestamp = document.getElementById('timestamp').innerText;
 
-
+    const welcomeMessage = document.getElementById('welcome-message');
     console.log({choiceState});
     const feedback = {
+        user: welcomeMessage.innerText,
         choice: choiceState.choice,
         text: form.querySelector('textarea[name="reason"]').value,
         timestamp: timestamp,
@@ -137,7 +170,7 @@ submitFeedbackButton.addEventListener('click', function() {
     })
     .then(response => {
         if (!response.ok) {
-            alert("All values in feedback form should be filled");
+            alert("Feedback Bug");
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
@@ -159,6 +192,6 @@ submitFeedbackButton.addEventListener('click', function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetchDataEvalArcade();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     fetchDataEvalArcade();
+// });

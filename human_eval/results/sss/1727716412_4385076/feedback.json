@@ -1,0 +1,6 @@
+{
+    "chosen": "neither",
+    "comment": "",
+    "timestamp": "1727716412_4385076",
+    "question": "Which Output is Better?\n\nTask: \"svg2image\"\n\nCriterion: \"(2) Model Output\" should be as close as possible to \"(3) Model Input\""
+}

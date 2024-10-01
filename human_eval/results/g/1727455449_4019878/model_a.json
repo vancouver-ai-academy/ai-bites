@@ -1,0 +1,6 @@
+{
+    "path": "static/datasets/phi3_bigdoc",
+    "prompt": "<|image_1|>Please turn the provided image into HTML format.",
+    "image_input": "static/datasets/phi3_bigdoc/f0afa3252bdc56d292dedbe3dd51ac966faa3a97/image.png",
+    "image_output": "static/datasets/phi3_bigdoc/f0afa3252bdc56d292dedbe3dd51ac966faa3a97/html2image.png"
+}

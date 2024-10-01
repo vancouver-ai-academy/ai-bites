@@ -1,0 +1,6 @@
+{
+    "path": "static/datasets/phi3_bigdoc",
+    "prompt": "<|image_1|>Could you create scalable vector graphic from the image?",
+    "image_input": "static/datasets/phi3_bigdoc/fc21a2d835c2835f2d729ce8aad395c7f68dadd8/image.png",
+    "image_output": "static/datasets/phi3_bigdoc/fc21a2d835c2835f2d729ce8aad395c7f68dadd8/svg2image.png"
+}

@@ -1,0 +1,6 @@
+{
+    "path": "static/datasets/phi3_bigdoc",
+    "prompt": "<|image_1|>Create a JSON representation of the flowchart provided.",
+    "image_input": "static/datasets/phi3_bigdoc/ea38914e-90d7-499d-9c10-e0983de5bbaa/image.png",
+    "image_output": "static/datasets/phi3_bigdoc/ea38914e-90d7-499d-9c10-e0983de5bbaa/flow2image.png"
+}

@@ -31,7 +31,7 @@ def index():
     Returns:
         str: Rendered HTML for the index page.
     """
-    return render_template(f"index.html")
+    return render_template(f"{args.starting_page}.html")
 
 
 def save_json(path, data):
@@ -43,46 +43,13 @@ def save_json(path, data):
 ################
 
 
-def get_user_data_folder(request):
-    response = request.get_json()
-    dataset_name = response["dataset"]
-    user_name = response["user"]
-    user_data_folder = os.path.join(app.config["USERS_FOLDER"], user_name, dataset_name)
-    return user_data_folder
-
-
 # EVAL FUNCTIONS
 # --------------
-
-
-@app.route("/eval_page")
-def eval_page():
-
-    return render_template("eval_arcade.html")
-
-
-@app.route("/submit-feedback", methods=["POST"])
-def submit_feedback():
-    """
-    Handle submission of feedback data.
-
-    Returns:
-        JSON response: Success or error message.
-    """
-
-    # Parse the JSON data from the request
-    feedback_data = request.get_json()
-    user_data_folder = get_user_data_folder(request)
-    insight_id = feedback_data.get("insight").split("-")[-1]
-    output_folder = os.path.join(user_data_folder, f"insight_card_{insight_id}")
-    insight_dict = json.load(open(os.path.join(output_folder, "insight_dict.json")))
-
-    output_file = os.path.join(output_folder, "feedback.json")
-    # feedback_data["insight_dict"] = insight_dict
-    with open(output_file, "w") as f:
-        json.dump(feedback_data, f, indent=4)
-    print(f"feedback saved in {output_file}")
-    return jsonify({"status": "success", "message": "Feedback submitted successfully!"})
+def get_feedback_path(user, timestamp):
+    user_folder = re.sub(r"\W", "_", user)
+    feedback_path = os.path.join(args.output_folder, user_folder, timestamp)
+    os.makedirs(feedback_path, exist_ok=True)
+    return feedback_path
 
 
 @app.route("/submit-feedback-compare", methods=["POST"])
@@ -95,10 +62,16 @@ def submit_feedback_compare():
     try:
         # Parse the JSON data from the request
         feedback_data = request.get_json()
-
-        feedback_path = os.path.join(args.output_folder, feedback_data["timestamp"])
-        assert os.path.exists(feedback_path)
-        map_dict = {0: "yes", 1: "no"}
+        # replace all special characters with "_"
+        feedback_path = get_feedback_path(
+            user=feedback_data["user"], timestamp=feedback_data["timestamp"]
+        )
+        map_dict = {
+            0: "a",
+            1: "b",
+            -1: "neither",
+            100: "both",
+        }
         chosen = map_dict[feedback_data["choice"]]
         comment = feedback_data["text"]
         feedback_fname = os.path.join(feedback_path, "feedback.json")
@@ -137,27 +110,131 @@ def main():
     return render_template("main.html")
 
 
-def load_predictions(path):
+# def load_predictions(path):
+#     """
+#     To be customized by user
+#     """
+#     import pandas as pd
+
+#     df = pd.read_csv("static/datasets/llm_samples_E5_nq_train 2.csv")
+#     pred_list = []
+#     for i in range(len(df)):
+#         pred_dict = df.iloc[i].to_dict()
+#         pred_list.append(pred_dict)
+
+#     # img_list = glob.glob(os.path.join(path, "*", "*.jpg"))
+#     # img_list = [{"img_path": img} for img in img_list]
+#     # assert len(img_list) > 0, f"No images found in {path}"
+
+#     return pred_list
+
+
+# @app.route("/eval_get_insight_cards", methods=["POST"])
+# def eval_get_insight_cards():
+#     """
+#     Render the main page.
+
+#     Returns:
+#         str: Rendered HTML for the main page.
+#     """
+#     response = request.get_json()
+#     data = {}
+
+#     # get image predictions
+#     model_1_preds = load_predictions(args.model_1_preds)
+#     # model_2_preds = load_predictions(args.model_2_preds)
+
+#     # get random index
+#     ind = np.random.choice(len(model_1_preds))
+#     model_a = model_1_preds[ind]
+#     # # coin flip
+#     # if np.random.rand() > 0.5:
+#     #     model_a = model_1_preds[ind]
+#     #     model_b = model_2_preds[ind]
+#     # else:
+#     #     model_a = model_2_preds[ind]
+#     #     model_b = model_1_preds[ind]
+
+#     # assert all exist
+#     # model_a["instruction"] = model_a["instruction"].replace("\n", "<br>")
+#     data["insight_card_a"] = render_template(
+#         "fragments/output_card.html",
+#         model_output=model_a,
+#         id="A",
+#     )
+
+#     # data["insight_card_b"] = render_template(
+#     #     "fragments/output_card.html",
+#     #     model_output=model_b,
+#     #     id="B",
+#     # )
+
+#     data["task"] = args.task_name
+#     data["timestamp"] = str(time.time()).replace(".", "")
+
+#     feedback_path = os.path.join(args.output_folder, data["timestamp"])
+#     os.makedirs(feedback_path, exist_ok=True)
+
+#     # save in json file
+#     save_json(os.path.join(feedback_path, "model_a.json"), model_a)
+#     # save_json(os.path.join(feedback_path, "model_b.json"), model_b)
+#     # save_json(
+#     #     os.path.join(feedback_path, "feedback.json"), {"choice": "", "comment": ""}
+#     # )
+#     print("saved in ", feedback_path)
+#     return jsonify(data)
+
+
+def load_json(path):
+    with open(path, "r") as f:
+        data = json.load(f)
+    return data
+
+
+def get_image_preds_bigdoc(path, task):
     """
     To be customized by user
     """
-    import pandas as pd
 
-    df = pd.read_csv("static/datasets/llm_samples_E5_nq_train 2.csv")
-    pred_list = []
-    for i in range(len(df)):
-        pred_dict = df.iloc[i].to_dict()
-        pred_list.append(pred_dict)
+    # loop over folders
+    img_list = []
+    for folder in os.listdir(path):
+        folder_path = os.path.join(path, folder)
+        image_input = os.path.join(folder_path, "image.png")
+        image_meta = load_json(os.path.join(folder_path, f"{folder}.json"))
+        if (
+            task == "chart2summary"
+            and image_meta["dataset_name"] == "BigDocChart2Summary"
+        ):
+            # task = "chart2summary"
+            img_list += [
+                {
+                    "path": path,
+                    "prompt": image_meta["user_input"]["content"],
+                    "image_input": image_input,
+                    "text_output": image_meta["output"],
+                }
+            ]
+        else:
+            image_output = os.path.join(folder_path, f"{task}.png")
+            if not os.path.exists(image_output):
+                continue
+            img_list += [
+                {
+                    "path": path,
+                    "prompt": image_meta["user_input"]["content"],
+                    "image_input": image_input,
+                    "image_output": image_output,
+                }
+            ]
 
-    # img_list = glob.glob(os.path.join(path, "*", "*.jpg"))
-    # img_list = [{"img_path": img} for img in img_list]
-    # assert len(img_list) > 0, f"No images found in {path}"
-
-    return pred_list
+    assert len(img_list) > 0, f"No images found in {path}"
+    print("Found ", len(img_list), " images")
+    return img_list
 
 
 @app.route("/eval_get_insight_cards", methods=["POST"])
-def eval_get_insight_cards():
+def eval_get_insight_cards_bigdoc():
     """
     Render the main page.
 
@@ -165,51 +242,71 @@ def eval_get_insight_cards():
         str: Rendered HTML for the main page.
     """
     response = request.get_json()
-    data = {}
+    task = np.random.choice(["html2image", "svg2image", "flow2image", "chart2summary"])
+    data = {"user": response["user"]}
 
+    # task = "chart2summary"
     # get image predictions
-    model_1_preds = load_predictions(args.model_1_preds)
-    # model_2_preds = load_predictions(args.model_2_preds)
+    model_1_images = get_image_preds_bigdoc(args.model_1_preds, task)
+    model_2_images = get_image_preds_bigdoc(args.model_2_preds, task)
 
     # get random index
-    ind = np.random.choice(len(model_1_preds))
-    model_a = model_1_preds[ind]
-    # # coin flip
-    # if np.random.rand() > 0.5:
-    #     model_a = model_1_preds[ind]
-    #     model_b = model_2_preds[ind]
-    # else:
-    #     model_a = model_2_preds[ind]
-    #     model_b = model_1_preds[ind]
+    ind = np.random.choice(len(model_1_images))
+    # coin flip
+    if np.random.rand() > 0.5:
+        model_a = model_1_images[ind]
+        model_b = model_2_images[ind]
+    else:
+        model_a = model_2_images[ind]
+        model_b = model_1_images[ind]
 
     # assert all exist
-    # model_a["instruction"] = model_a["instruction"].replace("\n", "<br>")
+    if task == "chart2summary":
+        card = "example_fragments/bigdoc_text_card.html"
+    else:
+        card = "example_fragments/bigdoc_card.html"
+
     data["insight_card_a"] = render_template(
-        "fragments/output_card.html",
+        card,
         model_output=model_a,
         id="A",
     )
 
-    # data["insight_card_b"] = render_template(
-    #     "fragments/output_card.html",
-    #     model_output=model_b,
-    #     id="B",
-    # )
+    data["insight_card_b"] = render_template(
+        card,
+        model_output=model_b,
+        id="B",
+    )
 
-    data["task"] = args.task_name
-    data["timestamp"] = str(time.time()).replace(".", "")
-
-    feedback_path = os.path.join(args.output_folder, data["timestamp"])
-    os.makedirs(feedback_path, exist_ok=True)
-
-    # save in json file
+    data["task"] = task
+    data["timestamp"] = str(time.time()).replace(".", "_")
+    data["criterion"] = map_task_to_criterion(task)
+    feedback_path = get_feedback_path(user=data["user"], timestamp=data["timestamp"])
+    # save model a and be
+    save_json(os.path.join(feedback_path, "meta.json"), {"task": task})
     save_json(os.path.join(feedback_path, "model_a.json"), model_a)
-    # save_json(os.path.join(feedback_path, "model_b.json"), model_b)
-    # save_json(
-    #     os.path.join(feedback_path, "feedback.json"), {"choice": "", "comment": ""}
-    # )
+    save_json(os.path.join(feedback_path, "model_b.json"), model_b)
     print("saved in ", feedback_path)
     return jsonify(data)
+
+
+def map_task_to_criterion(task):
+    if task == "html2image":
+        return "Evaluate based on how clode the image in 'Model Output' is to '(3) Model Input'"
+
+    elif task == "svg2image":
+        return "Evaluate based on how clode the image in 'Model Output' is to '(3) Model Input'"
+
+    # pdf2latex
+
+    elif task == "flow2image":
+        return (
+            "Evaluate based on how the node names and edges in 'Model Output' is close to '(3) Model Input',"
+            + "please disregard colors and orientation"
+        )
+
+    elif task == "chart2summary":
+        return "Are the facts and numbers in the summary consistent with the information in the chart image?"
 
 
 if __name__ == "__main__":
@@ -218,32 +315,28 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--port", type=int, default=7883)
-    parser.add_argument("-s", "--starting_page", type=str, default="eval")
+    parser.add_argument("-s", "--starting_page", type=str, default="paired_output")
     parser.add_argument("-o", "--output_folder", type=str, default="results")
     parser.add_argument(
         "-m1",
         "--model_1_preds",
         type=str,
-        default="static/datasets/csm/model_1_preds",
+        default="static/datasets/phi3_bigdoc",
     )
     parser.add_argument(
         "-m2",
         "--model_2_preds",
         type=str,
-        default="static/datasets/csm/model_2_preds",
+        default="static/datasets/phi3_bigdoc",
     )
 
-    parser.add_argument(
-        "-t",
-        "--task_name",
-        type=str,
-        default="Plot Generation",
-    )
+    # parser.add_argument(
+    #     "-t",
+    #     "--task",
+    #     type=str,
+    #     default="svg2image",
+    # )
 
     args = parser.parse_args()
-    if args.starting_page == "eval":
-        starting_page = "eval_comparison"
-    else:
-        starting_page = "index"
 
     app.run(debug=True, port=args.port, host="0.0.0.0", use_reloader=False)

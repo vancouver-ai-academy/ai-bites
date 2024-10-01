@@ -1,0 +1,6 @@
+{
+    "chosen": "both",
+    "comment": "",
+    "timestamp": "1727461490_8908017",
+    "question": "Which Output is Better?\n\nTask: \"html2image\"\n\nCriterion: \"(2) Model Output\" should be as close as possible to \"(3) Model Input\""
+}

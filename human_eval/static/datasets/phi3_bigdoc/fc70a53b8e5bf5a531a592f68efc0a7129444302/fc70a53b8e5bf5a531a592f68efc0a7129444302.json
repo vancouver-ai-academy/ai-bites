@@ -1,0 +1,14 @@
+{
+    "sample_id": "fc70a53b8e5bf5a531a592f68efc0a7129444302",
+    "dataset_name": "SVGDataset",
+    "task_name": "structured_parsing",
+    "user_input": {
+        "role": "user",
+        "content": "<|image_1|>Create an SVG version of the image."
+    },
+    "gpt_answer": {
+        "role": "assistant",
+        "content": "<svg width=\"16px\" height=\"16px\" viewBox=\"0 0 16 16\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <title>\u7ec8\u70b9\u5706</title>\n    <g id=\"\u53f8\u673a\u7aef2\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"\u9996\u9875\" transform=\"translate(-56.000000, -703.000000)\" fill=\"#F24646\">\n            <g id=\"Item-3\" transform=\"translate(24.000000, 436.000000)\">\n                <g id=\"\u7ec8\u70b9\u5706\" transform=\"translate(32.000000, 267.000000)\">\n                    <circle id=\"\u692d\u5706\u5f62\u5907\u4efd-2\" fill-opacity=\"0.4\" cx=\"8\" cy=\"8\" r=\"8\"></circle>\n                    <circle id=\"\u692d\u5706\u5f62\u5907\u4efd\" cx=\"8\" cy=\"8\" r=\"6\"></circle>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>"
+    },
+    "output": "<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 128 128\" style=\"enable-background:new 0 0 128 128;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:#F50129;}\n\t.st1{opacity:0.35;fill:#F50129;enable-background:new    ;}\n</style>\n<path class=\"st0\" d=\"M64,128C28.71,128,0,99.29,0,64C0,28.71,28.71,0,64,0s64,28.71,64,64C128,99.29,109.29,128,64,128z\"/>\n<path class=\"st1\" d=\"M64,4C30.87,4,4,30.87,4,64s26.87,60,60,60s60-26.87,60-60S97.13,4,64,4z M64,116c-29.29,0-53-23.71-53-53\n\tc0-29.29,23.71-53,53-53s53,23.71,53,53C117,92.29,93.29,116,64,116z\"/>\n</svg> \n"
+}

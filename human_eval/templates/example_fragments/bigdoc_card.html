@@ -1,0 +1,43 @@
+<br>
+
+<div class="insight-blob-eval" id="insight-card" style="position: relative;">
+    <!-- Insight 1/1 Box -->
+    <div style="position: absolute; top: -5px; left: 20px; color:white;background-color: #2c3e50; padding: 5px 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); transform: translateY(-50%);">
+        <p style="margin: 0; font-size: 1.3rem; font-weight: bold;">Result {{id}}</p>
+    </div>
+
+    <div style="display: flex;flex-direction: column;">
+        <!-- Description on the left -->
+        <div id="insight-answer" style="flex: 1;">
+           
+         <!-- <div id="model-input">
+             <p><strong>Model Input:</strong></p>
+            <a href="{{model_input}}" target="_blank">
+                <img src="{{model_input}}" style="max-width:95%" alt="Plot Image">
+            </a>
+            <br>
+        </div> -->
+        <!-- Plot on the right -->
+        <div id="model-output">
+             <h4>(1) Model Prompt ({{id}}): </h4> 
+             <p>     "{{model_output.prompt}}"</p>
+
+            <h4>(2) Model Output ({{id}}):</h4>
+            <div style="text-align: center;">
+             <a href="{{model_output.image_output}}" target="_blank">
+                <img src="{{model_output.image_output}}" style="max-width:80%" alt="Plot Image">
+            </a>
+            </div>
+
+            <h4>(3) Model Input ({{id}}):</h4>
+                <div style="text-align: center;">
+            <a href="{{model_output.image_input}}" target="_blank">
+                <img src="{{model_output.image_input}}" style="max-width:80%" alt="Plot Image">
+            </a>
+            </div>
+
+            
+            <br>
+        </div>
+    </div>
+</div>

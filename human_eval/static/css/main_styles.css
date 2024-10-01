@@ -1268,7 +1268,8 @@ th {
 }
 
 .compare-columns {
-    display: flex;
+    /* display: flex; */
+    display: hidden;
     gap: 1.25rem;
     width: 100%;
     /* justify-content: ce  nter; */

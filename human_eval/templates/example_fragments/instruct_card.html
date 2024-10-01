@@ -1,0 +1,33 @@
+<br>
+
+<div class="insight-blob-eval" id="insight-card" style="position: relative;">
+    <!-- Insight 1/1 Box -->
+    <div style="position: absolute; top: -5px; left: 20px; color:white;background-color: #2c3e50; padding: 5px 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); transform: translateY(-50%);">
+        <p style="margin: 0; font-size: 1.3rem; font-weight: bold;">Result {{id}}</p>
+    </div>
+
+    <div style="display: flex;flex-direction: column;">
+        <!-- Description on the left -->
+        <div id="insight-answer" style="flex: 1;">
+           
+         <!-- <div id="model-input">
+             <p><strong>Model Input:</strong></p>
+            <a href="{{model_input}}" target="_blank">
+                <img src="{{model_input}}" style="max-width:95%" alt="Plot Image">
+            </a>
+            <br>
+        </div> -->
+        <!-- Plot on the right -->
+        <div id="model-output">
+            <p style="margin: 0; font-size: 1.3rem; font-weight: bold;"><strong>Instruction:</strong></p>
+            <p>{{ model_output.instruction | replace('\n', '<br>') | safe }}</p>
+            <hr>
+             <p style="margin: 0; font-size: 1.3rem; font-weight: bold;"><strong>Query Passage:</strong></p>
+            <p>{{ model_output.query_passage | replace('\n', '<br>') | safe }}</p>
+            <!-- <a href="{{model_output.img_path}}" target="_blank">
+                <img src="{{model_output.img_path}}" style="max-width:95%" alt="Plot Image"> -->
+            </a>
+            <br>
+        </div>
+    </div>
+</div>

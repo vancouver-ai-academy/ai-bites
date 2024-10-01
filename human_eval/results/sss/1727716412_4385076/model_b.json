@@ -1,0 +1,6 @@
+{
+    "path": "static/datasets/phi3_bigdoc",
+    "prompt": "<|image_1|>Please generate SVG elements to match this image.",
+    "image_input": "static/datasets/phi3_bigdoc/fcb4fff755dd501523e3fa96a7d53f9ea54148de/image.png",
+    "image_output": "static/datasets/phi3_bigdoc/fcb4fff755dd501523e3fa96a7d53f9ea54148de/svg2image.png"
+}

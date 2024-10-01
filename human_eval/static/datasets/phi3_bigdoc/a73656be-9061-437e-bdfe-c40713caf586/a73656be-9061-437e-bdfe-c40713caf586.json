@@ -1,0 +1,14 @@
+{
+    "sample_id": "a73656be-9061-437e-bdfe-c40713caf586",
+    "dataset_name": "BigDocChart2Summary",
+    "task_name": "summary",
+    "user_input": {
+        "role": "user",
+        "content": "<|image_1|>What does this chart tell us? Summarize it briefly."
+    },
+    "gpt_answer": {
+        "role": "assistant",
+        "content": "This vertical bar chart displays the top 20 actors based on their number of appearances in Netflix movies and TV shows. The x-axis represents the frequency of appearance, and the y-axis lists the actors' names. Anum Kheri leads with over 40 appearances, followed by other actors like Rahul Jai and Takajun Saito with lower counts ranging from approximately 20 to just above 30 appearances."
+    },
+    "output": "The bar plot shows the frequency of the top 20 most common surnames in the dataset. Anupam Kher has the highest frequency, followed by Rupa Bhimani and Takahiro Sakurai. The other surnames have progressively lower frequencies, with Naseeruddin Shah having the lowest frequency among the top 20. \n"
+}
